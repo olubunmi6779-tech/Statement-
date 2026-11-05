@@ -88,4 +88,30 @@ conn.commit()
 print("Database ready!")
 
 genres = pd.read_sql("""SELECT DISTINCT(genre) FROM movie;""", conn)
-print("genres")
+print(genres)
+
+countries = pd.read_sql("""SELECT DISTINCT(country) FROM actor;""", conn)
+print(countries)
+
+top_movies = pd.read_sql("""SELECT title, rating FROM movie ORDER BY rating DESC;""", conn)
+print(top_movies)
+
+oldest_first = pd.read_sql("""SELECT title, year FROM movie ORDER BY year;""", conn)
+print(oldest_first)
+
+youngest_actors = pd.read_sql("""SELECT actor_name, birth_year FROM actor ORDER BY birth_year DESC;""", conn)
+print(youngest_actors)
+
+
+action_count = pd.read_sql("""SELECT COUNT(movie_id)
+FROM movie 
+WHERE genre =='Action';""", conn
+)
+print(action_count)
+
+
+animation_mins = pd.read_sql("""SELECT SUM(duration)
+FROM movie 
+WHERE genre =='Animation';""", conn
+)
+print(animation_mins)
